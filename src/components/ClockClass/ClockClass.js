@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ClockContainer } from '../styles/Element.styles';
+import { Button } from '../styles/Element.styles';
 import ChangeClock from './ChangeClock';
 
 export default class Clock extends React.Component {
@@ -25,8 +25,6 @@ export default class Clock extends React.Component {
             this.setState({
                 stopBtn: true,
             });
-
-            console.log('stop');
         };
     }
 
@@ -38,8 +36,6 @@ export default class Clock extends React.Component {
         this.setState({
             stopBtn: false,
         });
-
-        console.log('start');
     };
 
     handleChangeClock = (locale) => {
@@ -50,31 +46,26 @@ export default class Clock extends React.Component {
 
     render() {
         const { date, locale, stopBtn } = this.state;
-        console.log('Update Clock');
 
         return (
-            <ClockContainer>
+            <div>
+                <h3>Class Component</h3>
+                <hr />
+                <h1>{date.toLocaleTimeString(locale)}</h1>
                 <div>
-                    <h1>{date.toLocaleTimeString(locale)}</h1>
-                    <div>
-                        <ChangeClock
-                            localeChange={this.handleChangeClock}
-                            locale={locale === 'en-US' ? 'bn-BD' : 'en-US'}
-                        >
-                            {locale === 'en-US'
-                                ? 'ঘড়ি পরিবর্তন'
-                                : 'Change Clock'}
-                        </ChangeClock>
-                        <Button
-                            onClick={
-                                stopBtn ? this.startClock : this.stopeClock
-                            }
-                        >
-                            {stopBtn ? 'Start Clock' : 'Stop Clock'}
-                        </Button>
-                    </div>
+                    <ChangeClock
+                        localeChange={this.handleChangeClock}
+                        locale={locale === 'en-US' ? 'bn-BD' : 'en-US'}
+                    >
+                        {locale === 'en-US' ? 'ঘড়ি পরিবর্তন' : 'Change Clock'}
+                    </ChangeClock>
+                    <Button
+                        onClick={stopBtn ? this.startClock : this.stopeClock}
+                    >
+                        {stopBtn ? 'Start Clock' : 'Stop Clock'}
+                    </Button>
                 </div>
-            </ClockContainer>
+            </div>
         );
     }
 }
